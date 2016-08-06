@@ -137,7 +137,50 @@ function getProds() {
         },
         success: function (data) {
             $('#TextArea1').css('visibility', 'visible');
+            $('#TextArea1').css('height', (parseInt(JSON.parse(data["d"]).length, 10)*25).toString());
             $('#TextArea1').text(data["d"]);
+        }
+    });
+}
+
+
+function addFlavor() {
+    if ($('#Text2').val()) {
+        WebServiceURL = "IceWS.asmx";
+        $.support.cors = true;
+        $.ajax({
+            url: WebServiceURL + "/addFlavor",
+            dataType: "json",
+            type: "POST",
+            data: "{'Flavor':'" + ($('#Text2').val()).toString() + "'}",
+            contentType: "application/json; charset=utf-8",
+            error: function (err) {
+                alert("error: " + JSON.stringify(err));
+            },
+            success: function (data) {
+                alert("Successfully added " + data["d"] + "rows");
+            }
+        });
+    }
+}
+
+
+function getFlavors() {
+    WebServiceURL = "IceWS.asmx";
+    $.support.cors = true;
+    $.ajax({
+        url: WebServiceURL + "/getFlavors",
+        dataType: "json",
+        type: "POST",
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        error: function (err) {
+            alert("error: " + JSON.stringify(err));
+        },
+        success: function (data) {
+            $('#TextArea2').css('visibility', 'visible');
+            $('#TextArea2').css('height', (parseInt(JSON.parse(data["d"]).length, 10) * 25).toString());
+            $('#TextArea2').text(data["d"]);
         }
     });
 }

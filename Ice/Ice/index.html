@@ -43,7 +43,7 @@
                 <ul data-role="listview" data-inset="true" style="min-width:250px;">
                     <li data-role="list-divider" style="background-color:dodgerblue; color:white; font-size:17px; font-family: 'Lucida Console'">Navigate:</li>
                     <li data-icon="home"><a href="#home">Home</a></li>
-                    <li data-icon="info"><a href="#">About</a></li>
+                    <li data-icon="info"><a href="#test">Test</a></li>
                     <li data-icon="location"><a href="#branches">Branches</a></li>
                     <li data-role="list-divider" style="background-color:dodgerblue; color:white; font-size:17px; font-family: 'Lucida Console'" ">Make Order:</li>
                     <li><a href="#">Ice Coffee</a></li>
@@ -118,6 +118,19 @@
             <input id="Button1" type="button" value="add to db" onclick="addProd();"/>
             <input id="Button2" type="button" value="get products" onclick="getProds();" />
             <textarea id="TextArea1" rows="2" cols="20" style="visibility:hidden"></textarea>
+            <hr />
+            <label for="Text2">Name Of Flavor</label>
+            <input id="Text2" type="text" placeholder="enter a flavor you want to add" />
+            <input id="Button3" type="button" value="add to db" onclick="addFlavor();" />
+            <input id="Button4" type="button" value="get flavors" onclick="getFlavors();" />
+            <textarea id="TextArea2" rows="2" cols="20" style="visibility:hidden"></textarea>
+            <hr />
+            <label for="Text3">Amount</label>
+            <input id="Text3" type="text" placeholder="enter an amount you want to add" />
+            <input id="Button5" type="button" value="add to db" onclick="addFlavor();" />
+            <input id="Button6" type="button" value="get amounts" onclick="getFlavors();" />
+            <textarea id="TextArea3" rows="2" cols="20" style="visibility:hidden"></textarea>
+
         </div>
         <!--Footer-->
         <div data-role="footer" data-position="fixed" data-theme="b">
