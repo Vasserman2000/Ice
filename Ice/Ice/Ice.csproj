@@ -75,10 +75,34 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="IceWS.asmx" />
+    <Content Include="images\cake.jpg" />
+    <Content Include="images\cakes.JPG" />
+    <Content Include="images\cones.png" />
+    <Content Include="images\frozen_yogurt.jpg" />
+    <Content Include="images\ice_cocktail.jpg" />
+    <Content Include="images\ice_coffee.jpg" />
+    <Content Include="images\milkshakes.jpg" />
+    <Content Include="images\tastes.jpg" />
+    <Content Include="images\three_balls.png" />
+    <Content Include="images\what_to_do_icon.png" />
+    <Content Include="images\whipped_cream.gif" />
+    <Content Include="images\whipped_cream.jpg" />
+    <Content Include="images\whipped_cream.png" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\IceJavaScript.js" />
+    <Content Include="Styles\IceStyleSheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IceWS.asmx.cs">
+      <DependentUpon>IceWS.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

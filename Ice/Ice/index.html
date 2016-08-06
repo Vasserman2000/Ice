@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="Styles/IceStyleSheet.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="Scripts/IceJavaScript.js"></script>
+</head>
+
+<body>
+    <!-- index page -->
+    <div data-role="page" id="index">
+        <!--Header-->
+        <div data-role="header">
+            <a href="#index" data-role="button" data-mini="true" data-inline="true" data-icon="home" data-iconpos="notext"
+               style="margin:0px;padding:0px;margin-bottom:20px;"></a>
+            <div id="head" align="center"><h3>SHALOM</h3></div>
+            <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="back" data-iconpos="notext"
+               style="margin:0px;padding:0px;margin-bottom:20px;"></a>
+        </div>
+        <!--Content-->
+        <div data-role="content">
+            <div id="slideshow">
+                <div>
+                    <img src="images/ice_cocktail.jpg" style="width:inherit" />
+                </div>
+                <div>
+                    <img src="images/tastes.jpg" style="width:inherit" />
+                </div>
+                <div>
+                    <img src="images/ice_coffee.jpg" style="width:inherit" />
+                </div>
+            </div>
+            <input id="Button1" type="button" value="button" onclick="clickme()" />
+            <div align="center">
+                <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-info ui-btn-icon-left">Choose what to do:</a>
+            </div>
+            <div data-role="popup" id="myPopup">
+                <ul data-role="listview" data-inset="true" style="min-width:250px;">
+                    <li data-role="list-divider" style="background-color:dodgerblue; color:white; font-size:17px; font-family: 'Lucida Console'">Navigate:</li>
+                    <li data-icon="home"><a href="#home">Home</a></li>
+                    <li data-icon="info"><a href="#">About</a></li>
+                    <li data-icon="location"><a href="#branches">Branches</a></li>
+                    <li data-role="list-divider" style="background-color:dodgerblue; color:white; font-size:17px; font-family: 'Lucida Console'" ">Make Order:</li>
+                    <li><a href="#">Ice Coffee</a></li>
+                    <li><a href="#">Frozen Cakes</a></li>
+                    <li><a href="#">Frozen Yogurt</a></li>
+                    <li><a href="#">Cones</a></li>
+                    <li><a href="#">Milkshakes </a></li>
+                    <li><a href="#">Milkshakes</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--Footer-->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <h5>@ YEP (Yoad, Elisha, Pinchas)</h5>
+        </div>
+    </div>
+    <!--End of index page-->
+    <!--MAP page-->
+    <div data-role="page" id="map-page">
+        <!--Header-->
+        <div data-role="header" data-theme="a">
+            <a href="index.html" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true" data-icon="home"></a>
+            <h1>Map</h1>
+            <a href="index.html" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true" data-icon="back"></a>
+        </div>
+        <!--Content-->
+        <div data-role="content" class="ui-content">
+            <div align="center">
+                <div id="map-canvas">
+                    <!-- map loads here... -->
+                </div>
+            </div>
+        </div>
+        <!--Footer-->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <h5>@ YEP (Yoad, Elisha, Pinchas)</h5>
+        </div>
+    </div>
+    <!--End of MAP page-->
+    <!--Branches page-->
+    <div data-role="page" id="branches">
+        <!--Header-->
+        <div data-role="header" data-theme="a">
+            <a href="index.html" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true" data-icon="home"></a>
+            <h1>Branches</h1>
+            <a href="" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true" data-icon="back"></a>
+        </div>
+        <!--Content-->
+        <div data-role="content" id="content" class="ui-content">
+            <div data-role="collapsible-set" data-iconpos="right" id="list"></div>
+        </div>
+        <!--Footer-->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <h5>@ YEP (Yoad, Elisha, Pinchas)</h5>
+        </div>
+    </div>
+    <!--End of Branches page-->
+
+
+    <!--TEST page-->
+    <div data-role="page" id="test">
+        <!--Header-->
+        <div data-role="header" data-theme="a">
+            <a href="index.html" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true" data-icon="home"></a>
+            <h1>TEST</h1>
+            <a href="index.html" data-role="button" data-iconpos="notext" data-mini="true" data-inline="true" data-icon="back"></a>
+        </div>
+        <!--Content-->
+        <div data-role="content" class="ui-content">
+            <label for="Text1">Name Of Product</label>
+            <input id="Text1" type="text" placeholder="enter the name of the product"/>
+            <input id="Button1" type="button" value="add to db" onclick="addProd();"/>
+            <input id="Button2" type="button" value="get products" onclick="getProds();" />
+            <textarea id="TextArea1" rows="2" cols="20" style="visibility:hidden"></textarea>
+        </div>
+        <!--Footer-->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <h5>@ YEP (Yoad, Elisha, Pinchas)</h5>
+        </div>
+    </div>
+    <!--End of TEST page-->
+</body>
+</html>
