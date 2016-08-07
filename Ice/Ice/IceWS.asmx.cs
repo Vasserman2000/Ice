@@ -35,14 +35,28 @@ public class IceWS : System.Web.Services.WebService
     public string GetYepBranches()
     {
         string sp = "sp_getBranches";
-        return ConvertDataTabletoString(getTable(sp));
+        return ConvertDataToString(getTable(sp));
+    }
+
+    [WebMethod]
+    public int addProduct(string ProductName)
+    {
+        int rows = 0;
+        string sp = "sp_addProduct";
+        SqlConnection con = new SqlConnection(conStr);
+        SqlCommand com = new SqlCommand(sp, con);
+        com.CommandType = CommandType.StoredProcedure;
+        com.Parameters.AddWithValue("@ProductName", ProductName);
+        com.Connection.Open();
+        rows = com.ExecuteNonQuery();
+        return rows;
     }
 
     [WebMethod]
     public string GetProducts()
     {
         string sp = "sp_getProducts";
-        return ConvertDataTabletoString(getTable(sp));
+        return ConvertDataToString(getTable(sp));
     }
 
     [WebMethod]
@@ -63,13 +77,14 @@ public class IceWS : System.Web.Services.WebService
     public string GetFlavors()
     {
         string sp = "sp_getFlavors";
-        return ConvertDataTabletoString(getTable(sp));
+        return ConvertDataToString(getTable(sp));
     }
 
 
-    private DataTable getTable(string command)
+    private DataSet getTable(string command)
     {
-        DataTable dt = new DataTable();
+        //DataTable dt = new DataTable();
+        DataSet ds = new DataSet();//
         using (SqlConnection con = new SqlConnection(conStr))
         {
             using (SqlCommand cmd = new SqlCommand(command, con))
@@ -77,28 +92,32 @@ public class IceWS : System.Web.Services.WebService
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
+                da.Fill(ds);//
+                //da.Fill(dt);
             }
         }
-        return dt;
+        return ds;
     }
 
 
-    private string ConvertDataTabletoString(DataTable dt)
+    private string ConvertDataToString(DataSet ds)
     {
         System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
         List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
         Dictionary<string, object> row;
-        foreach (DataRow dr in dt.Rows)
+        foreach (DataTable dt in ds.Tables)
         {
-            row = new Dictionary<string, object>();
-            foreach (DataColumn col in dt.Columns)
+            foreach (DataRow dr in dt.Rows)
             {
-                row.Add(col.ColumnName, dr[col]);
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
             }
-            rows.Add(row);
         }
-        return serializer.Serialize(rows);
+        return serializer.Serialize(rows);//Converts an object to a JSON string
     }
 }
 
