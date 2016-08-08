@@ -136,14 +136,17 @@ function getProds() {
             alert("error: " + JSON.stringify(err));
         },
         success: function (data) {
-            $('#TextArea1').css('visibility', 'visible');
-            $('#TextArea1').css('height', (parseInt(JSON.parse(data["d"]).length, 10)*25).toString());
-            $('#TextArea1').text(data["d"]);
             var count = 0;
-            for (var i = 0; i < JSON.parse(data["d"]).length; i++)
-                //if ((JSON.parse(data["d"]))[i].)
-                //alert(data["d"])
-                alert(Object.keys(data["d"])[i])
+            //alert(data["d"][0].colName)
+            $('#TextArea1').css('visibility', 'visible');
+            //$('#TextArea1').css('height', (parseInt(JSON.parse(data["d"]).length, 10)*25).toString());
+            //$('#TextArea1').text(data["d"]);
+            for (var i = 0; i < data["d"].length; i++)
+                if ((data["d"][i].colName) == "ProductName")
+                {
+                    count++;
+                }
+            alert(count)
         }
     });
 }

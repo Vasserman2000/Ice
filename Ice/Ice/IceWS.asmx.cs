@@ -32,7 +32,7 @@ public class IceWS : System.Web.Services.WebService
     //    return time;
     //}
     [WebMethod]
-    public string GetYepBranches()
+    public List<Yep> GetYepBranches()
     {
         string sp = "sp_getBranches";
         return ConvertDataToString(getTable(sp));
@@ -53,7 +53,7 @@ public class IceWS : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string GetProducts()
+    public List<Yep> GetProducts()
     {
         string sp = "sp_getProducts";
         return ConvertDataToString(getTable(sp));
@@ -74,7 +74,7 @@ public class IceWS : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string GetFlavors()
+    public List<Yep> GetFlavors()
     {
         string sp = "sp_getFlavors";
         return ConvertDataToString(getTable(sp));
@@ -100,25 +100,36 @@ public class IceWS : System.Web.Services.WebService
     }
 
 
-    private string ConvertDataToString(DataSet ds)
+    private List<Yep> ConvertDataToString(DataSet ds)
     {
-        System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-        List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-        Dictionary<string, object> row;
+        //System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+        List<Yep> rows = new List<Yep>();
+        //Dictionary<string, object> row;
+        //Yep row;
         foreach (DataTable dt in ds.Tables)
         {
             foreach (DataRow dr in dt.Rows)
             {
-                row = new Dictionary<string, object>();
+                Yep row;
+               // row = new Dictionary<string, object>();
                 foreach (DataColumn col in dt.Columns)
                 {
-                    row.Add(col.ColumnName, dr[col]);
+                    row = new Yep(col.ColumnName, dr[col]);
+                    //row.Add(col.ColumnName, dr[col]);
+                    rows.Add(row);
                 }
-                rows.Add(row);
+                
             }
         }
-        return serializer.Serialize(rows);//Converts an object to a JSON string
+        return rows;
     }
+}
+
+public class Yep
+{
+    public string colName { get; set; }
+    object value { get; set; }
+    public Yep (string colName, object value) { this.colName = colName; this.value = value; }
 }
 
 
